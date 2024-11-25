@@ -12,11 +12,12 @@ Each member (M1–M9) will act as a Proposer, Acceptor, and Learner. These roles
 - Acceptor: Votes on proposals and ensures majority agreement.
 - Learner: Learns the outcome once a majority of Acceptors agree.
 
+Acceptors act as servers while proposers act as clients sending various messages
+
 Paxos Messages can have the following types:
 * Prepare - Sent from Proposer to Acceptor to verify connection
 * Promise - Acknowledgement to check if any previous promises have been made to other Proposers
 * Accept - Sent to acceptor to accept a value
-* Accepted - Sent to proposer to verify value has been accepted
 * Learn - Sent to learner to check if consensus has been reached
 * Accept ok - Acceptor accepts value
 * Accept reject - Acceptor rejects value as there has been a previous promise made

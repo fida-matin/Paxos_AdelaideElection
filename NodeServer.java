@@ -3,6 +3,11 @@
 // COMP SCI 3012 - Distributed Systems UG
 // Assignment 3 - Paxos 
 
+/*
+ * Base Server Implementation
+ * creates a client handler and a method for starting server
+ * Takes in an acceptor as a message handler
+ */
 import java.io.*;
 import java.net.*;
 

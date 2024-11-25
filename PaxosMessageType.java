@@ -14,13 +14,12 @@
 /* Prepare - Sent from Proposer to Acceptor to verify connection
  * Promise - Acknowledgement to check if any previous promises have been made to other Proposers
  * Accept - Sent to acceptor to accept a value
- * Accepted - Sent to proposer to verify value has been accepted
  * Learn - Sent to learner to check if consensus has been reached
  * Accept ok - Acceptor accepts value
  * Accept reject - Acceptor rejects value as there has been a previous promise made
  */
 public enum PaxosMessageType {
-    PREPARE, PROMISE, ACCEPT, ACCEPTED, LEARN, ACCEPT_OK, ACCEPT_REJECT
+    PREPARE, PROMISE, ACCEPT, LEARN, ACCEPT_OK, ACCEPT_REJECT
 }
 /*
  * PaxosMessage Class Implementation

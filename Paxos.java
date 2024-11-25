@@ -3,6 +3,10 @@
 // COMP SCI 3012 - Distributed Systems UG
 // Assignment 3 - Paxos 
 
+/*
+ * Basic integrated test of Paxos with 9 members
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 

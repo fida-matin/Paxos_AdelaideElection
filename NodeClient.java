@@ -3,6 +3,11 @@
 // COMP SCI 3012 - Distributed Systems UG
 // Assignment 3 - Paxos 
 
+/*
+ * Base Client Implementation
+ * Send messages to server with either returning nothing or the response
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,6 +16,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class NodeClient {
+    // void instance of send message function
     public static void sendMessage(String host, int port, String message) {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(host, port), 5000); // 5 seconds connection timeout
@@ -27,7 +33,7 @@ public class NodeClient {
         }
     }
     
-
+    // send message function with a response string returned
     public static String sendMessageWithResponse(String host, int port, String message) {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(host, port), 5000); // 5 seconds connection timeout

@@ -6,6 +6,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Concurrent Paxos Test 
+ * Runs multiple proposals at once
+ */
+
 public class ConcurrentPaxosTest {
     public static void main(String[] args) throws InterruptedException {
         // Define council members (hosts and ports)
@@ -14,7 +19,11 @@ public class ConcurrentPaxosTest {
             "127.0.0.1:5002", // M2
             "127.0.0.1:5003", // M3
             "127.0.0.1:5004", // M4
-            "127.0.0.1:5005"  // M5
+            "127.0.0.1:5005",  // M5
+            "127.0.0.1:5006", // M6
+            "127.0.0.1:5007", // M7
+            "127.0.0.1:5008", // M8
+            "127.0.0.1:5009"  // M9
         );
 
         // Initialize the learner

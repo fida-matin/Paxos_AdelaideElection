@@ -3,24 +3,35 @@
 // COMP SCI 3012 - Distributed Systems UG
 // Assignment 3 - Paxos 
 
+/*
+ * Acceptor class implementation
+ * Creates an implementation for handling and receiving proposer messagas
+ * A message handler verifies the type and then runs suitable function depending on the type:
+ *  - prepare messages - handle prepare to send promise message
+ *  - accept - handle accept messages to send accept-ok or accept-reject messages
+ */
 public class Acceptor implements NodeServer.MessageHandler {
     private int promisedProposalNumber = -1;
     private int acceptedProposalNumber = -1;
     private String acceptedCandidate = null;
     private Learner learner;
     private int delay = 0;
-    
+
+    // basic constructor
     public Acceptor(Learner learner) {
         this.learner = learner;
     }
 
+    // constructor with delay for testing delay behaviour
     public Acceptor(Learner learner, int delay) {
         this.learner = learner;
         this.delay = delay;
     }
 
+    // message handler override from node server
     @Override
     public String handleMessage(String message) {
+        // -1 delay is set for dropped requests
         if (delay == -1) {
             System.out.println("Dropping request (no response).");
             return "Dropping request (no response).";// No response
@@ -30,12 +41,13 @@ public class Acceptor implements NodeServer.MessageHandler {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        // parse message to get all required data
         String[] parts = message.split(":");
         PaxosMessageType type = PaxosMessageType.valueOf(parts[0]);
         int proposalNumber = Integer.parseInt(parts[1]);
         String candidate = parts.length > 2 ? parts[2] : null;
 
+        // run correct function based on message types
         switch (type) {
             case PREPARE:
                 return handlePrepare(proposalNumber);
@@ -46,6 +58,7 @@ public class Acceptor implements NodeServer.MessageHandler {
         }
     }
 
+    // prepare message handler
     private String handlePrepare(int proposalNumber) {
         if (proposalNumber < promisedProposalNumber) {
             System.out.println("Ignoring PREPARE with proposal number " + proposalNumber + 
@@ -58,6 +71,7 @@ public class Acceptor implements NodeServer.MessageHandler {
         return PaxosMessageType.PROMISE + ":" + proposalNumber + ":" + acceptedProposalNumber + ":" + acceptedCandidate;
     }
 
+    // accept message handler
     private String handleAccept(int proposalNumber, String candidate) {
         synchronized (this) {
             if (proposalNumber < promisedProposalNumber) {

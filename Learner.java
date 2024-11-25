@@ -3,6 +3,11 @@
 // COMP SCI 3012 - Distributed Systems UG
 // Assignment 3 - Paxos 
 
+/*
+ * Learner Class Implementation
+ * Checks from acceptors to verify whether consensus is reached
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 
